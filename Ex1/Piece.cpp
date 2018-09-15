@@ -121,4 +121,12 @@ bool Piece::isWayFree(int dstRow, int dstCol) const
 
 	return true;
 }
+bool Piece::isLegalMove(int row, int col)const {
+//reachable + free way + non friendly piece at destination =>true , otherwise =>false
+return isReachable(row, col) && isWayFree(row, col) && isDestinationClear(row,col);
+}
+bool Piece::isDestinationClear(int row, int col)const {
+	Piece** brd = _brd->getBoard();
+	return brd[row][col].getPlayer()->isWhite() != this->getPlayer()->isWhite();
+}
 
