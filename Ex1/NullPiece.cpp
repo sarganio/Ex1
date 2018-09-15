@@ -5,7 +5,7 @@ NullPiece::NullPiece(int row, int col) : Piece(NULL, '#', row, col, NULL)
 
 }
 
-bool NullPiece::isLegalMove(int row, int col) const
+bool NullPiece::isReachable(int row, int col) const
 {
 	return true;
 }

@@ -2,10 +2,12 @@
 #include <string>
 #include <iostream>
 #include "King.h"
+#include "Knight.h"
 
 using namespace std;
 
 class King;
+class Knight;
 
 
 Piece::Piece(Player* pl, char sign, int row, int col, Board* board) :
@@ -131,7 +133,12 @@ bool Piece::isLegalMove(int row, int col) {
 	int originalRow = _row, originalCol = _col;//for restoration of original row and col
 	
 	IsReachable = isReachable(row, col);
-	IsWayFree = isWayFree(row, col);
+	//Knight can jump over any pieces
+	if (typeid(*this) == typeid(Knight))
+		IsWayFree = true;
+	else
+		IsWayFree = isWayFree(row, col);
+
 	IsDestinationClear = isDestinationClear(row, col);
 
 	if (!IsReachable || !IsWayFree || !IsDestinationClear)
