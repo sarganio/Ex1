@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="NullPiece.cpp" />
     <ClCompile Include="Piece.cpp" />
