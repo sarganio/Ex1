@@ -1,7 +1,13 @@
 #include "King.h"
 
 King::King(Player* owner, int row, int col, Board* brd) :Piece(owner, 'k', row, col, brd) {}
+bool King::isReachable(int row,int col)const{
+	//check if the destination isn't neighbor to current location - if destination isn't reachable
+	if (row > _row + 1 || row < _row - 1 || col > _col + 1 || col < _col - 1)
+		return false;
+	return true;
 
+}
 bool King::isChess(){
 	Piece** brd = _brd->getBoard();
 

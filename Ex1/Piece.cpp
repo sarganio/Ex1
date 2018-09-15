@@ -1,8 +1,12 @@
 #include "Piece.h"
 #include <string>
 #include <iostream>
+#include "King.h"
 
 using namespace std;
+
+class King;
+
 
 Piece::Piece(Player* pl, char sign, int row, int col, Board* board) :
 			_player(pl), _row(row), _col(col), _brd(board), _startRow(row), _startCol(col)
@@ -121,9 +125,23 @@ bool Piece::isWayFree(int dstRow, int dstCol) const
 
 	return true;
 }
-bool Piece::isLegalMove(int row, int col)const {
-//reachable + free way + non friendly piece at destination =>true , otherwise =>false
-return isReachable(row, col) && isWayFree(row, col) && isDestinationClear(row,col);
+bool Piece::isLegalMove(int row, int col) {
+	//reachable + free way + non friendly piece at destination =>true , otherwise =>false
+	bool IsChess, IsReachable, IsWayFree, IsDestinationClear;
+	int originalRow = _row, originalCol = _col;//for restoration of original row and col
+	
+	IsReachable = isReachable(row, col);
+	IsWayFree = isWayFree(row, col);
+	IsDestinationClear = isDestinationClear(row, col);
+
+	if (!IsReachable || !IsWayFree || !IsDestinationClear)
+		return false;
+	_row = row;
+	_col = col;
+	IsChess = _player->getKing()->isChess();
+	_row = originalRow;
+	_col = originalCol;
+return IsChess;
 }
 bool Piece::isDestinationClear(int row, int col)const {
 	Piece** brd = _brd->getBoard();

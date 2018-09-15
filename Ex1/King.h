@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include "Piece.h"
 
 class Piece;
@@ -11,7 +9,7 @@ class King : public Piece
 {
 public:
 	King(Player*, int row, int col, Board*);
-	virtual bool isLegalMove(int, int) const;
+	bool isReachable(int, int)const;
 	bool isChess();
 
 private:

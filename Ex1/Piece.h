@@ -3,17 +3,20 @@
 #include "Player.h"
 #include "Board.h"
 
+
 using namespace std;
 
 class Player;
 class Board;
+
 
 class Piece
 {
 public:
 	char getSign() const;
 	Player* getPlayer() const;
-	bool isLegalMove(int, int) const;
+	bool isLegalMove(int, int) ;
+	virtual bool isReachable(int, int) const = 0;
 	void setPosition(int row, int col);
 	Piece(Player*, char sign, int row, int col, Board* board);
 	virtual ~Piece();
@@ -30,7 +33,6 @@ protected:
 	int _col;
 	Board* _brd;
 
-	virtual bool isReachable(int, int) const = 0;
 	bool isWayFree(int dstRow, int dstCol) const;
 	bool isDestinationClear(int, int)const;
 };
