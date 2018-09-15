@@ -36,6 +36,9 @@
     <ClCompile Include="Bishop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pipe.h">
