@@ -8,9 +8,9 @@ bool Pawn::isReachable(int row, int col)const {
 	if (row == _row - 2 && this->_row == BOARD_SIZE - 2 && this->getPlayer()->isWhite()) {
 		return true;
 	}
-	//check 1 step ahead
+	//check 1 step ahead ((Piece(*)[8]) brd[0],8)
 	Piece*** brd = _brd->getBoard();
-	if ((this->getPlayer()->isWhite() && _row == row - 1) || (!this->getPlayer()->isWhite() && _row == row + 1)) 
+	if ((!this->getPlayer()->isWhite() && _row == row - 1) || (this->getPlayer()->isWhite() && _row == row + 1)) 
 		if (brd[row][col]->getSign() == '#')
 			return true;
 	//check eating option

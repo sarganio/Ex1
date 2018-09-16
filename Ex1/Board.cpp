@@ -44,13 +44,13 @@ void Board::print()const {
 		std::cout << endl;
 	}
 }
-void Board::getString(char res[])const {
-	res = new char[BOARD_SIZE*BOARD_SIZE + 1];
+void Board::getString(char* res)const {
 	for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++)
 		res[i] = _brd[i / BOARD_SIZE][i%BOARD_SIZE]->getSign();
-	res[BOARD_SIZE*BOARD_SIZE] = 0;
 }
 bool Board::isPieceOfPlayer(int row, int col, Player* isOwner) const{
+	if (_brd[row][col]->getPlayer() == NULL)
+		return false;
 	return _brd[row][col]->getPlayer()->isWhite() == isOwner->isWhite();
 }
 bool Board::tryMove(int srcRow, int srcCol, int dstRow, int dstCol) const {

@@ -17,7 +17,7 @@ public:
 	Board(Player*, Player*);
 	~Board();
 	void print() const;
-	void getString(char res[]) const;
+	void getString(char* res) const;
 	bool isPieceOfPlayer(int row, int col, Player* pl) const;
 	bool tryMove(int srcRow, int srcCol, int dstRow, int dstCol) const;
 	Piece*** getBoard() const;
