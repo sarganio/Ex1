@@ -45,7 +45,7 @@ void Piece::setPosition(int row, int col)
 }
 bool Piece::isWayFree(int dstRow, int dstCol) const
 {
-	Piece** matBoard = _brd->getBoard();
+	Piece*** matBoard = _brd->getBoard();
 	Piece* currPiece = NULL;
 	int  i,j;
 	// move on the col only
@@ -56,7 +56,8 @@ bool Piece::isWayFree(int dstRow, int dstCol) const
 
 		for (j = startCol + 1; j < endCol ; ++j)
 		{
-			currPiece = *(matBoard  + _row * BOARD_SIZE + j);
+			//*(matBoard  + _row * BOARD_SIZE + j)
+			currPiece = matBoard[_row][j];
 
 			// if there is player that own the piece
 			if (currPiece->getPlayer() != NULL)
@@ -76,7 +77,8 @@ bool Piece::isWayFree(int dstRow, int dstCol) const
 
 		for (i = startRow + 1; i < endRow; ++i)
 		{
-			currPiece = *(matBoard + i * BOARD_SIZE + _col);
+			//*(matBoard + i * BOARD_SIZE + _col);
+			currPiece = matBoard[i][_col];
 
 			// if there is player that own the piece
 			if (currPiece->getPlayer() != NULL)
@@ -115,7 +117,8 @@ bool Piece::isWayFree(int dstRow, int dstCol) const
 
 	for (i = startRow + 1, j = startCol+num; i < endRow ; ++i)
 	{
-		currPiece = *(matBoard + i * 8 + j);
+		//*(matBoard + i * 8 + j);
+		currPiece = matBoard[i][j];
 
 		// check if the board in the place contains null piece
 		if (currPiece->getPlayer() != NULL)
@@ -151,7 +154,7 @@ bool Piece::isLegalMove(int row, int col) {
 return IsChess;
 }
 bool Piece::isDestinationClear(int row, int col)const {
-	Piece** brd = _brd->getBoard();
-	return brd[row][col].getPlayer()->isWhite() != this->getPlayer()->isWhite();
+	Piece*** brd = _brd->getBoard();
+	return brd[row][col]->getPlayer()->isWhite() != this->getPlayer()->isWhite();
 }
 

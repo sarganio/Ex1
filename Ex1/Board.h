@@ -20,7 +20,7 @@ public:
 	void getString(char res[]) const;
 	bool isPieceOfPlayer(int row, int col, Player* pl) const;
 	bool tryMove(int srcRow, int srcCol, int dstRow, int dstCol) const;
-	Piece** getBoard() const;
+	Piece*** getBoard() const;
 	void Move(int srcRow, int srcCol, int dstRow, int dstCol) ;
 	void undoLastMove();
 

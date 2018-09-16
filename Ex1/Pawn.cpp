@@ -9,12 +9,12 @@ bool Pawn::isReachable(int row, int col)const {
 		return true;
 	}
 	//check 1 step ahead
-	Piece** brd = _brd->getBoard();
+	Piece*** brd = _brd->getBoard();
 	if ((this->getPlayer()->isWhite() && _row == row - 1) || (!this->getPlayer()->isWhite() && _row == row + 1)) 
-		if (brd[row][col].getSign() == '#')
+		if (brd[row][col]->getSign() == '#')
 			return true;
 	//check eating option
 	if (row == _row + 1 && (col == _col + 1 || col == _col - 1))
-		return this->getPlayer()->isWhite() != (_brd->getBoard())[row][col].getPlayer()->isWhite();
+		return this->getPlayer()->isWhite() != (_brd->getBoard())[row][col]->getPlayer()->isWhite();
 	return false;
 }
