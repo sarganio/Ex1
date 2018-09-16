@@ -32,6 +32,10 @@ Board::Board(Player* white,Player* black){
 			_brd[i % 2 == 0 ? 1 : BOARD_SIZE - 2][j] = new Pawn(i % 2 == 0 ? black : white, i % 2 == 0 ? 1 : BOARD_SIZE - 2, j, this);
 
 	}
+	//create and place the NullPieces at empty places
+	for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++)
+		if (_brd[i / BOARD_SIZE][i%BOARD_SIZE] == NULL)
+			_brd[i / BOARD_SIZE][i%BOARD_SIZE] = new NullPiece(i / BOARD_SIZE, i%BOARD_SIZE);
 }
 void Board::print()const {
 	for (int i = 0; i < BOARD_SIZE; i++) {
