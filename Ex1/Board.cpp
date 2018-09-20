@@ -20,12 +20,12 @@ Board::Board(Player* white,Player* black){
 	for (int i = 0; i < 2; i++) {
 		int row = i % 2 == 0 ? 0 : BOARD_SIZE - 1;
 		_brd[row][0] = new Rook(i % 2 == 0 ? black : white, row, 0, this);
-		//_brd[row][1] = new Knight(i % 2 == 0 ? black : white, row, 1, this);
-		//_brd[row][2] = new Bishop(i % 2 == 0 ? black : white, row, 2, this);
+		_brd[row][1] = new Knight(i % 2 == 0 ? black : white, row, 1, this);
+		_brd[row][2] = new Bishop(i % 2 == 0 ? black : white, row, 2, this);
 		//_brd[row][i % 2 == 0 ? 4 : 3] = new Queen(i % 2 == 0 ? black : white, row, [i % 2 == 0 ? 4 : 3, this);
 		_brd[row][i % 2 == 0 ? 3 : 4] = new King(i % 2 == 0 ? black : white, row, i % 2 == 0 ? 3 : 4, this);
-		//_brd[row][5] = new Bishop(i % 2 == 0 ? black : white, row, 5, this);
-		//_brd[row][6] = new Knight(i % 2 == 0 ? black : white, row, 6, this);
+		_brd[row][5] = new Bishop(i % 2 == 0 ? black : white, row, 5, this);
+		_brd[row][6] = new Knight(i % 2 == 0 ? black : white, row, 6, this);
 		_brd[row][7] = new Rook(i % 2 == 0 ? black : white, row, 7, this);
 		
 		for (int j = 0; j < BOARD_SIZE; j++) {}

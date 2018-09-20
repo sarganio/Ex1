@@ -115,8 +115,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="NullPiece.cpp" />
     <ClCompile Include="Piece.cpp" />
