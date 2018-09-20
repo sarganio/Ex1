@@ -85,7 +85,7 @@ int Manager::playMove(string move)
 
 	// Make the move!
 	_brd->Move(srcRow, srcCol, dstRow, dstCol);
-/*
+
 	// check for chess
 	if (_currPlayer->getKing()->isChess())
 	{
@@ -95,21 +95,51 @@ int Manager::playMove(string move)
 
 		return INVALID_CHESS_WILL_OCCURE;
 	}
-*/
+
 
 
 	int res;
 	// after move check if it is chess
-	//if (_otherPlayer->getKing()->isChess())
+	if (_otherPlayer->getKing()->isChess())
 	{
 		res =  VALID_CHESS_MOVE;
 	}
-	//else
+	else
 	{
 		res = VALID_MOVE;
 	}
 
 	this->changeTurn();
+	//check if it is a checkmate 
+	if (_currPlayer->getKing()->isChess()) {
+		Piece** brd = _brd->getBoard();
+		bool isMoveFound = false;
+		//searching for friendly pieces
+		for (int i = 0; i < BOARD_SIZE*BOARD_SIZE && !isMoveFound; i++) {
+			//skip empty spaces and rival's pieces
+			if (brd[i]->getSign() == '#' || _currPlayer->isWhite() != brd[i]->getPlayer()->isWhite())
+				continue;
+			//searching for move option by the friendly piece which was found earlier
+			for (int j = 0; j < BOARD_SIZE*BOARD_SIZE; j++)
+				if (brd[i]->isLegalMove(j / BOARD_SIZE, j%BOARD_SIZE)) {
+					//found a valid move and play it
+					_brd->Move(i / BOARD_SIZE, i%BOARD_SIZE, j / BOARD_SIZE, j%BOARD_SIZE);
+					if (_currPlayer->getKing()->isChess()) {
+						//the move didn't cancle the chess
+						_brd->undoLastMove();
+						continue;
+					}
+					//the move cancled the chess
+					_brd->undoLastMove();
+					isMoveFound = true;
+					break;
+				}
+				//no valid move was found - checkmate
+				else if (j == BOARD_SIZE * BOARD_SIZE - 1 && i == BOARD_SIZE * BOARD_SIZE - 1)
+					res = CHECK_MATE;
+		}//for
+	}//if
+	
 	return res;
 
 } 

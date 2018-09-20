@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="NullPiece.cpp" />
     <ClCompile Include="Piece.cpp" />

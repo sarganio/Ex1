@@ -22,8 +22,8 @@ Board::Board(Player* white,Player* black){
 		_brd[row][0] = new Rook(i % 2 == 0 ? black : white, row, 0, this);
 		//_brd[row][1] = new Knight(i % 2 == 0 ? black : white, row, 1, this);
 		//_brd[row][2] = new Bishop(i % 2 == 0 ? black : white, row, 2, this);
-		//_brd[row][i % 2 == 0 ? 3 : 4] = new Queen(i % 2 == 0 ? black : white, row, 3, this);
-		//_brd[row][i % 2 == 0 ? 4 : 3] = new King(i % 2 == 0 ? black : white, row, 4, this);
+		//_brd[row][i % 2 == 0 ? 4 : 3] = new Queen(i % 2 == 0 ? black : white, row, [i % 2 == 0 ? 4 : 3, this);
+		_brd[row][i % 2 == 0 ? 3 : 4] = new King(i % 2 == 0 ? black : white, row, i % 2 == 0 ? 3 : 4, this);
 		//_brd[row][5] = new Bishop(i % 2 == 0 ? black : white, row, 5, this);
 		//_brd[row][6] = new Knight(i % 2 == 0 ? black : white, row, 6, this);
 		_brd[row][7] = new Rook(i % 2 == 0 ? black : white, row, 7, this);
@@ -77,7 +77,13 @@ void Board::Move(int srcRow, int srcCol, int dstRow, int dstCol) {
 }
 void Board::undoLastMove() {
 	_brd[_lastSrcRow][_lastSrcCol] = _brd[_lastDstRow][_lastDstCol];
+	_brd[_lastSrcRow][_lastSrcCol]->setPosition(_lastSrcRow, _lastSrcCol);
 	_brd[_lastDstRow][_lastDstCol] = _lastPiece;
+	_lastPiece = NULL;
+	_lastDstCol = -1;
+	_lastDstRow = -1;
+	_lastSrcCol = -1;
+	_lastSrcRow = -1;
 }
 Board::~Board() {
 	delete [] _brd;
