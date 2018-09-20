@@ -28,8 +28,8 @@ Board::Board(Player* white,Player* black){
 		//_brd[row][6] = new Knight(i % 2 == 0 ? black : white, row, 6, this);
 		_brd[row][7] = new Rook(i % 2 == 0 ? black : white, row, 7, this);
 		
-		for (int j = 0; j < BOARD_SIZE; j++) 
-			_brd[i % 2 == 0 ? 1 : BOARD_SIZE - 2][j] = new Pawn(i % 2 == 0 ? black : white, i % 2 == 0 ? 1 : BOARD_SIZE - 2, j, this);
+		for (int j = 0; j < BOARD_SIZE; j++) {}
+			//_brd[i % 2 == 0 ? 1 : BOARD_SIZE - 2][j] = new Pawn(i % 2 == 0 ? black : white, i % 2 == 0 ? 1 : BOARD_SIZE - 2, j, this);
 
 	}
 	//create and place the NullPieces at empty places
@@ -61,12 +61,13 @@ Piece** Board::getBoard()const {
 }
 void Board::Move(int srcRow, int srcCol, int dstRow, int dstCol) {
 	//remember new last piece
-	if(!_lastPiece)
+	if(_lastPiece)
 		if (_lastPiece->getSign() != '#')
 			delete _lastPiece;
 	_lastPiece = _brd[dstRow][dstCol];
 	//make move
 	_brd[dstRow][dstCol] = _brd[srcRow][srcCol];
+	_brd[dstRow][dstCol]->setPosition(dstRow, dstCol);
 	_brd[srcRow][srcCol] = new NullPiece(srcRow,srcCol);
 	//remember last move
 	_lastDstCol = dstCol;
@@ -79,5 +80,5 @@ void Board::undoLastMove() {
 	_brd[_lastDstRow][_lastDstCol] = _lastPiece;
 }
 Board::~Board() {
-	delete[] _brd;
+	delete [] _brd;
 }

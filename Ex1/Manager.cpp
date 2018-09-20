@@ -85,7 +85,7 @@ int Manager::playMove(string move)
 
 	// Make the move!
 	_brd->Move(srcRow, srcCol, dstRow, dstCol);
-
+/*
 	// check for chess
 	if (_currPlayer->getKing()->isChess())
 	{
@@ -95,16 +95,16 @@ int Manager::playMove(string move)
 
 		return INVALID_CHESS_WILL_OCCURE;
 	}
-
+*/
 
 
 	int res;
 	// after move check if it is chess
-	if (_otherPlayer->getKing()->isChess())
+	//if (_otherPlayer->getKing()->isChess())
 	{
 		res =  VALID_CHESS_MOVE;
 	}
-	else
+	//else
 	{
 		res = VALID_MOVE;
 	}
