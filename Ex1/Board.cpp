@@ -22,14 +22,14 @@ Board::Board(Player* white,Player* black){
 		_brd[row][0] = new Rook(i % 2 == 0 ? black : white, row, 0, this);
 		_brd[row][1] = new Knight(i % 2 == 0 ? black : white, row, 1, this);
 		_brd[row][2] = new Bishop(i % 2 == 0 ? black : white, row, 2, this);
-		//_brd[row][i % 2 == 0 ? 4 : 3] = new Queen(i % 2 == 0 ? black : white, row, [i % 2 == 0 ? 4 : 3, this);
-		_brd[row][i % 2 == 0 ? 3 : 4] = new King(i % 2 == 0 ? black : white, row, i % 2 == 0 ? 3 : 4, this);
+		_brd[row][3] = new Queen(i % 2 == 0 ? black : white, row, 3, this);
+		_brd[row][4] = new King(i % 2 == 0 ? black : white, row, 4, this);
 		_brd[row][5] = new Bishop(i % 2 == 0 ? black : white, row, 5, this);
 		_brd[row][6] = new Knight(i % 2 == 0 ? black : white, row, 6, this);
 		_brd[row][7] = new Rook(i % 2 == 0 ? black : white, row, 7, this);
 		
-		for (int j = 0; j < BOARD_SIZE; j++) {}
-			//_brd[i % 2 == 0 ? 1 : BOARD_SIZE - 2][j] = new Pawn(i % 2 == 0 ? black : white, i % 2 == 0 ? 1 : BOARD_SIZE - 2, j, this);
+		for (int j = 0; j < BOARD_SIZE; j++) 
+			_brd[i % 2 == 0 ? 1 : BOARD_SIZE - 2][j] = new Pawn(i % 2 == 0 ? black : white, i % 2 == 0 ? 1 : BOARD_SIZE - 2, j, this);
 
 	}
 	//create and place the NullPieces at empty places

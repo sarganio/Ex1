@@ -111,17 +111,19 @@ int Manager::playMove(string move)
 
 	this->changeTurn();
 	//check if it is a checkmate 
+	bool isMoveFound = false;
 	if (_currPlayer->getKing()->isChess()) {
 		Piece** brd = _brd->getBoard();
-		bool isMoveFound = false;
 		//searching for friendly pieces
 		for (int i = 0; i < BOARD_SIZE*BOARD_SIZE && !isMoveFound; i++) {
 			//skip empty spaces and rival's pieces
 			if (brd[i]->getSign() == '#' || _currPlayer->isWhite() != brd[i]->getPlayer()->isWhite())
 				continue;
 			//searching for move option by the friendly piece which was found earlier
-			for (int j = 0; j < BOARD_SIZE*BOARD_SIZE; j++)
-				if (brd[i]->isLegalMove(j / BOARD_SIZE, j%BOARD_SIZE)) {
+			for (int j = 0; j < BOARD_SIZE*BOARD_SIZE; j++) {
+				//check if the move is valid (move is legal and destination is clear
+				if (brd[i]->isLegalMove(j / BOARD_SIZE, j%BOARD_SIZE) && (brd[j]->getSign() =='#' ||
+					_currPlayer->isWhite() != brd[j]->getPlayer()->isWhite()) ) {
 					//found a valid move and play it
 					_brd->Move(i / BOARD_SIZE, i%BOARD_SIZE, j / BOARD_SIZE, j%BOARD_SIZE);
 					if (_currPlayer->getKing()->isChess()) {
@@ -134,10 +136,9 @@ int Manager::playMove(string move)
 					isMoveFound = true;
 					break;
 				}
-				//no valid move was found - checkmate
-				else if (j == BOARD_SIZE * BOARD_SIZE - 1 && i == BOARD_SIZE * BOARD_SIZE - 1)
-					res = CHECK_MATE;
-		}//for
+			}//for j
+		}//for i
+		res = isMoveFound ? res : CHECK_MATE;
 	}//if
 	
 	return res;

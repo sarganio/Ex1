@@ -121,8 +121,10 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="NullPiece.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Queen.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp" />
